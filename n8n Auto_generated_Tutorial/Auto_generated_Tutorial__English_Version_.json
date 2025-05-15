@@ -1,0 +1,416 @@
+{
+  "name": "Auto-generated Tutorial (English Version)",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -620,
+        -40
+      ],
+      "id": "b525c8a6-fd5f-4d36-892d-9114854d37f2",
+      "name": "When chat message received",
+      "webhookId": ""
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17-thinking",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        120
+      ],
+      "id": "610da032-18e8-46a0-a250-b0f28e366e5f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-04-17-thinking",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        680,
+        220
+      ],
+      "id": "f703278b-7974-456e-8745-d6235e05f8eb",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "**System Message:**\n\nYou are an AI assistant specialized in creating highly structured and detailed tutorial outlines. Your task is to generate a hierarchical, machine-parsable Markdown tutorial outline based on the user-inputted topic. This outline will serve as the foundation for generating detailed content for each section in subsequent steps.\n\n**Instructions and Constraints:**\n\n1.  **Overall Structure:**\n    * The outline must begin with a Level 1 heading (`#`) containing `Tutorial Outline: [User-Inputted Topic]`.\n\n2.  **Hierarchy Definition and Markup (Strictly Adhere):**\n    * **Chapter (Level 1 - Major Topic):** Use Level 2 Markdown headings (`##`). Each outline must contain at least 3 \"Chapters.\" Example: `## 1. [Chapter Title]`.\n    * **Section (Level 2 - Sub-Topic):** Under each \"Chapter,\" use Level 3 Markdown headings (`###`). Each \"Chapter\" must contain at least 3 \"Sections.\" Example: `### 1.1 [Section Title]`.\n    * **Sub-section (Level 3 - Detailed Knowledge Point):** Under each \"Section,\" use Level 4 Markdown headings (`####`). Each \"Section\" must contain at least 2 \"Sub-sections.\" Example: `#### 1.1.1 [Sub-section Title]`.\n    * **Prohibit other heading levels** (e.g., `#####` or deeper, or un-marked list items дереваas levels).\n\n3.  **Content Requirements:**\n    * All heading content should be concise and accurately reflect the core teaching point of that part.\n    * Ensure the outline is logically coherent, covering the core knowledge areas and skill points required to learn the topic.\n\n4.  **Output Format (Extremely Important):**\n    * **Pure Markdown:** The output must be purely Markdown text.\n    * **No Extraneous Text:** Apart from the defined Markdown heading structure, absolutely no introductory remarks, explanatory text, comments, summaries, dialogue, or any other non-outline structural text should be included.\n    * **Each Heading on Its Own Line:** Every Markdown heading (`#`, `##`, `###`, `####`) must occupy its own line.\n    * **Numbering Style:** Please use the `number.number` or `number.number.number` style for numbering `##`, `###`, and `####` level headings, as shown in the example.\n\n**Example Output Format (Please strictly imitate this structure and markup style):**\n\n```markdown\n# Tutorial Outline: [User-Inputted Topic]\n\n## 1. [Chapter Title A]\n### 1.1 [Section Title A.1]\n#### 1.1.1 [Sub-section Title A.1.1]\n#### 1.1.2 [Sub-section Title A.1.2]\n### 1.2 [Section Title A.2]\n#### 1.2.1 [Sub-section Title A.2.1]\n#### 1.2.2 [Sub-section Title A.2.2]\n### 1.3 [Section Title A.3]\n#### 1.3.1 [Sub-section Title A.3.1]\n#### 1.3.2 [Sub-section Title A.3.2]\n\n## 2. [Chapter Title B]\n### 2.1 [Section Title B.1]\n#### 2.1.1 [Sub-section Title B.1.1]\n#### 2.1.2 [Sub-section Title B.1.2]\n### 2.2 [Section Title B.2]\n#### 2.2.1 [Sub-section Title B.2.1]\n#### 2.2.2 [Sub-section Title B.2.2]\n### 2.3 [Section Title B.3]\n#### 2.3.1 [Sub-section Title B.3.1]\n#### 2.3.2 [Sub-section Title B.3.2]\n\n## 3. [Chapter Title C]\n### 3.1 [Section Title C.1]\n#### 3.1.1 [Sub-section Title C.1.1]\n#### 3.1.2 [Sub-section Title C.1.2]\n### 3.2 [Section Title C.2]\n#### 3.2.1 [Sub-section Title C.2.1]\n#### 3.2.2 [Sub-section Title C.2.2]\n### 3.3 [Section Title C.3]\n#### 3.3.1 [Sub-section Title C.3.1]\n#### 3.3.2 [Sub-section Title C.3.2]"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -400,
+        -40
+      ],
+      "id": "e5a01cb7-5201-45e0-9003-cd6ec1da7064",
+      "name": "AI Agent Outline"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Your task is to write detailed content for a specific sub-topic within a larger tutorial document.\nStrictly follow the context and sub-topic information provided below.\n\nHere is the full outline structure of this tutorial, of which the sub-topic you currently need to elaborate on is a part:\n\"\"\"\n{{ $json.originalFullOutline }}\n\"\"\"\n\nThe sub-topic to be detailed now (please include this line first in your output as the heading):\n{{ $json.originalLine }}\n\nBased on the outline context above, and focusing on the \"current sub-topic to be detailed\" specified, write detailed, accurate, and easy-to-understand instructional content. The content should begin directly with the detailed explanation of that sub-topic, providing sufficient detail, background knowledge, and examples (such as code, formulas, operational procedures, etc., if applicable). If the content is extensive, use Markdown unordered lists (`- `) or ordered lists (`1. `) to organize information. If including code, use Markdown code blocks.\n\nPlease begin writing:",
+        "options": {
+          "systemMessage": "**System Message:**\n\nYou are a seasoned technical writer, instructional designer, and subject matter expert. Your core mission is to take a given sub-topic from an outline and write detailed, accurate, beginner-friendly, and practical instructional content for it.\n\n**Your Role and Style:**\n1.  **Expert Elaboration:** For the given sub-topic, you need to demonstrate a deep understanding of the knowledge point.\n2.  **Clarity and Accessibility:** Use concise and clear language. If technical terms are necessary, provide brief explanations.\n3.  **Detail-Oriented and Practical:** Provide sufficient detail, background knowledge, specific steps, and examples.\n4.  **Structured Content:** If the content is extensive, use unordered lists (`- `) or ordered lists (`1. `) to organize information.\n\n**Output Requirements:**\n* **Include Heading:** You will receive an instruction to include the original heading line of the sub-topic you are currently processing at the beginning of your output. Strictly follow this instruction.\n* **Content Immediately Follows Heading:** After outputting the specified heading line, directly begin writing the detailed instructional text for that sub-topic.\n* **Markdown Format:** If the content includes code examples, be sure to use Markdown code block GFM. For lists, also use standard Markdown syntax.\n* **Appropriate Length:** The content length should be commensurate with the complexity and importance of the sub-topic.\n\nYou will now receive a specific sub-topic (and possibly the overall outline context and explicit instructions for the output heading). Please generate detailed instructional content for it according to the requirements above."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        720,
+        0
+      ],
+      "id": "1258ad36-0c3e-4f11-842c-60c69086781f",
+      "name": "AI Agent Content"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputItem = $input.first(); // 獲取上一個節點 (AI Agent Outline) 的輸出 item\nlet markdownOutline = \"\";\n\n// 確保 markdownOutline 是有效的字串\nif (inputItem && inputItem.json && typeof inputItem.json.output === 'string') {\n  markdownOutline = inputItem.json.output;\n} else {\n  console.log(\"警告：從 AI Agent Outline 獲取的 Markdown 大綱缺失或非字串格式。\");\n  return []; // 如果輸入無效，返回一個空陣列，這樣後續的 Loop 節點就不會執行\n}\n\nconst lines = markdownOutline.split('\\n');\nconst outputItems = []; // 這個陣列將用來收集所有新創建的、獨立的 n8n items\n\nfor (const line of lines) {\n  const trimmedLine = line.trimStart();\n  let level = 0;\n  let title = \"\";\n  let shouldGenerateContent = false;\n\n  // --- 解析 Markdown 標題 ---\n  if (trimmedLine.startsWith('# ')) {\n    if (!trimmedLine.startsWith('##')) {\n        level = 1;\n        title = trimmedLine.substring(2).trim();\n    }\n  }\n  if (level === 0 && trimmedLine.startsWith('## ')) {\n    if (!trimmedLine.startsWith('###')) {\n        level = 2;\n        title = trimmedLine.substring(3).trim();\n    }\n  }\n  if (level === 0 && trimmedLine.startsWith('### ')) {\n    if (!trimmedLine.startsWith('####')) {\n        level = 3;\n        title = trimmedLine.substring(4).trim();\n        shouldGenerateContent = true;\n    }\n  }\n  if (level === 0 && trimmedLine.startsWith('#### ')) {\n    level = 4;\n    title = trimmedLine.substring(5).trim();\n    shouldGenerateContent = true;\n  }\n  // --- Markdown 解析邏輯結束 ---\n\n  if (level > 0) {\n    // 為每一個提取到的標題，創建一個符合 n8n item 結構的新對象\n    // 並將其添加到 outputItems 陣列中\n    outputItems.push({\n      json: { // 每個元素都是一個標準的 n8n item 結構\n        title: title,\n        level: level,\n        originalLine: line.trim(),\n        shouldGenerateContent: shouldGenerateContent,\n        // 非常重要：將原始大綱包含在每個 item 中，以便後續 AI 生成內容時參考上下文\n        originalFullOutline: markdownOutline \n      }\n    });\n  }\n}\n\n// Code 節點現在返回一個包含多個獨立 items 的陣列\n// 例如，如果 markdownOutline 中有 15 個標題，outputItems 就會包含 15 個 item 對象\nreturn outputItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        -40
+      ],
+      "id": "03f8e88d-1e28-489c-98d5-2511b39865ad",
+      "name": "Outline to Item"
+    },
+    {
+      "parameters": {
+        "batchSize": "=1",
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        180,
+        -40
+      ],
+      "id": "269d4835-1fb8-446a-8d28-67eac8f07607",
+      "name": "Loop Over Outline",
+      "notesInFlow": false,
+      "retryOnFail": false,
+      "executeOnce": false,
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "27e3c5c0-51d3-4ea8-acdc-99a3e1f8cb89",
+              "name": "title",
+              "value": "={{ $items(\"If Generate Content\")[0].json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "7014694d-ac14-4a40-88b4-0beea58f80fa",
+              "name": "=level",
+              "value": "={{ $items(\"If Generate Content\")[0].json.level }}",
+              "type": "number"
+            },
+            {
+              "id": "efffa356-7a06-43ee-93b6-beecae46f0ea",
+              "name": "originalLine",
+              "value": "={{ $items(\"If Generate Content\")[0].json.originalLine }}",
+              "type": "string"
+            },
+            {
+              "id": "5ef0511c-6142-4db0-8750-78f3c7641328",
+              "name": "shouldGenerateContent",
+              "value": "={{ $items(\"If Generate Content\")[0].json.shouldGenerateContent }}",
+              "type": "boolean"
+            },
+            {
+              "id": "cf339426-b482-433a-a64f-4f7b60a2c24f",
+              "name": "generatedContent",
+              "value": "={{ $items(\"AI Agent Content\")[0].json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1080,
+        0
+      ],
+      "id": "a381bd0e-7ffe-4939-8522-3c3cb99ed7be",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3fcde631-23c4-48d8-8e21-74f5d1f5a228",
+              "leftValue": "={{ $json.shouldGenerateContent }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        460,
+        0
+      ],
+      "id": "3bacf701-aa4c-4055-9b8b-5c06bfcb5ad8",
+      "name": "If Generate Content"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "tutorialBinaryData",
+        "name": "={{ $items(\"Merge All Content\")[0].json.tutorialFileName.replace(\"Tutorial Outline:\", \"\").trim().replace(/[^\\w\\s\\u4e00-\\u9fa5.-]/g, '').replace(/\\s+/g, '_').substring(0, 100) }}.md",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        900,
+        -160
+      ],
+      "id": "fed158d2-fbc9-4b90-93ec-55bd5e31f76b",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const processedItems = $input.all(); \nlet finalMarkdownDocument = \"\"; \nlet mainTitleForFileName = \"Generated_Tutorial\"; // 預設檔案名稱\n\nif (!processedItems || processedItems.length === 0) {\n  console.log(\"警告：沒有從 Loop 節點接收到任何 items 進行合併。\");\n  return [{ json: { fullTutorialMarkdown: \"\", tutorialFileName: mainTitleForFileName } }]; \n}\n\n// 假設原始大綱在每個 item 中都有 (或者至少第一個 item 有)\n// 我們從第一個 item 獲取 originalFullOutline 來提取主標題\nif (processedItems[0].json && processedItems[0].json.originalFullOutline) {\n  const outlineLines = processedItems[0].json.originalFullOutline.split('\\n');\n  if (outlineLines[0] && outlineLines[0].startsWith('# ')) {\n    mainTitleForFileName = outlineLines[0].substring(2).trim(); // 去除 \"# \"\n  } else if (processedItems[0].json.title && processedItems[0].json.level === 1) {\n    // 如果第一個 item 恰好是 level 1 的主標題，也可以用它的 title\n    mainTitleForFileName = processedItems[0].json.title;\n  }\n}\n\n\nfor (const item of processedItems) {\n  if (!item || !item.json) {\n    console.log(\"警告：在 processedItems 中發現無效的 item 結構。\");\n    continue; \n  }\n  const data = item.json;\n\n  if (data.shouldGenerateContent === true && data.generatedContent) {\n    finalMarkdownDocument += data.generatedContent; \n    finalMarkdownDocument += \"\\n\\n\"; \n  } else if (data.originalLine) { \n    finalMarkdownDocument += data.originalLine;     \n    finalMarkdownDocument += \"\\n\";                  \n    if (typeof data.level === 'number' && data.level < 3 || !data.generatedContent) { \n       finalMarkdownDocument += \"\\n\";               \n    }\n  } else {\n    console.log(\"警告：Item 既沒有 generatedContent 也沒有 originalLine:\", JSON.stringify(data));\n  }\n}\n\nconst trimmedDocument = finalMarkdownDocument.trim();\n\n// 返回包含完整教程 Markdown 文本和檔案名稱的 item\nreturn [{ \n  json: { \n    fullTutorialMarkdown: trimmedDocument,\n    tutorialFileName: mainTitleForFileName // 將提取到的主標題作為檔案名稱的基礎\n  } \n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        -160
+      ],
+      "id": "d810465a-e096-4a30-90ad-b178e2fce310",
+      "name": "Merge All Content"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "fullTutorialMarkdown",
+        "binaryPropertyName": "tutorialBinaryData",
+        "options": {
+          "encoding": "utf8",
+          "fileName": "={{ $json.tutorialFileName.replace(\"Tutorial Outline:\", \"\").trim().replace(/[^\\w\\s\\u4e00-\\u9fa5.-]/g, '').replace(/\\s+/g, '_').substring(0, 100) }}.md"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        680,
+        -160
+      ],
+      "id": "9917d213-1161-428d-b8ce-7a01162c2561",
+      "name": "Convert to File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent Outline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent Outline",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent Content",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent Outline": {
+      "main": [
+        [
+          {
+            "node": "Outline to Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent Content": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Outline to Item": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Outline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Outline": {
+      "main": [
+        [
+          {
+            "node": "Merge All Content",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If Generate Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Outline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Generate Content": {
+      "main": [
+        [
+          {
+            "node": "AI Agent Content",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Outline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge All Content": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5c8b7486-666b-48f6-af9b-3fb4ec0e83b8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a770c9f23cb802715b28475337d089b459a50ad7ac3e4fde98238b2f37bfebba"
+  },
+  "id": "w6iKUMeGVA92SPfN",
+  "tags": []
+}
