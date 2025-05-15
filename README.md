@@ -36,7 +36,11 @@ Combine n8n with AI APIs to form a personalized workflow.
  2. Click "Create Clients"<br>![image](https://github.com/user-attachments/assets/feecfcf7-e1a6-4ad1-827c-300ff3523c2a)
  3. Choose "Web application"
  4. Fill the name (like n8n Drive Web Client)
- 5. Fill the n8n's URL (or paste https://oauth.n8n.cloud/oauth2/callback)<br>![image](https://github.com/user-attachments/assets/a662d045-2119-4882-a9e7-729a022c4e42)
+ 5. Fill the n8n's URL <br>![image](https://github.com/user-attachments/assets/a662d045-2119-4882-a9e7-729a022c4e42)
+      - Open the Google Dive node
+      - Create new credential
+      - Find OAuth Redirect URL<br>![image](https://github.com/user-attachments/assets/1b872ef8-61ca-4a24-92c8-a36e46c40326)
+      - Copy and paste the URL
  6. Click "Create"
  7. Keep your information in a safe place
 
