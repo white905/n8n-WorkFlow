@@ -1,5 +1,5 @@
 # n8n-WorkFlow
-Combine n8n with AI APIs to form a personalized workflow.
+A collection of n8n workflows demonstrating the integration of AI APIs (such as Gemini) to build personalized automation tools and applications. Each workflow in this repository showcases a different use case.
 
 ## API Configuration
 ### Gemini API
@@ -55,6 +55,17 @@ Combine n8n with AI APIs to form a personalized workflow.
 4. Update the scope
 
 ## n8n Auto-generated Tutorial Documentation
+### Prerequisites
+- An API Key for the Gemini API.
+- A Google Cloud Platform project with the Google Drive API enabled
+- A designated Google Drive folder to save the output
+- A working n8n setup ready to import workflows
+
+### Open the WorkFlow
+1. Create the n8n Account
+2. Click "Create Workflow"
+3. Click the icon in the upper right corner and import the file<br>![image](https://github.com/user-attachments/assets/ed466428-7238-48cd-8f9b-67735e5f6de5)
+
 ### API Configuration
 #### Set Google Gemini Api Account
 1. Choose "Create new credential"<br>![image](https://github.com/user-attachments/assets/307c4a02-4f23-446b-a668-70e9af1af331)
