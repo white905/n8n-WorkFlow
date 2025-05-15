@@ -70,6 +70,7 @@ Combine n8n with AI APIs to form a personalized workflow.
 1. Go to your Google Drive and Create a folder you want to save the tutorial
 2. Copy the folder's URL
 3. Paste the URL in the Parent Floder<br>![image](https://github.com/user-attachments/assets/ce93b28a-1dcd-42c0-9a75-59c1d1da72b0)
+4. Click "Sign in with Google"
 
 ### How to use it?
 1. Open the Chatbox
