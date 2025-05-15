@@ -36,9 +36,38 @@ Combine n8n with AI APIs to form a personalized workflow.
  2. Click "Create Clients"<br>![image](https://github.com/user-attachments/assets/feecfcf7-e1a6-4ad1-827c-300ff3523c2a)
  3. Choose "Web application"
  4. Fill the name (like n8n Drive Web Client)
- 5. 
+ 5. Fill the n8n's URL (or paste https://oauth.n8n.cloud/oauth2/callback)<br>![image](https://github.com/user-attachments/assets/a662d045-2119-4882-a9e7-729a022c4e42)
+ 6. Click "Create"
+ 7. Keep your information in a safe place
 
+#### Add Gmail Account
+ 1. Go to Audience
+ 2. Add the gmail you want to connect to n8n
 
-1. Click "Credentials"
-2. Click "Create Credentials"
-3. Choose "OAuth Client ID"
+#### Set the Scope
+1. Go to Data Access
+2. Click "Add or remove scopes"
+3. Find Google Drive API and choose the scope (.../auth/drive)<br>![image](https://github.com/user-attachments/assets/8804d77b-a342-4db0-a436-c4cdb91105c5)
+4. Update the scope
+
+## n8n Auto-generated Tutorial Documentation
+### API Configuration
+#### Set Google Gemini Api Account
+1. Choose "Create new credential"<br>![image](https://github.com/user-attachments/assets/307c4a02-4f23-446b-a668-70e9af1af331)
+2. Paste your API Key created before
+3. Save
+4. Choose the model (Recommend the latest version of the flash model)
+
+#### Set Google Drive Api
+1. Click "Create new credential"
+2. Pasted the Client ID and Client Password you get on step "Linked to n8n"
+
+#### Set the Floder
+1. Go to your Google Drive and Create a folder you want to save the tutorial
+2. Copy the folder's URL
+3. Paste the URL in the Parent Floder<br>![image](https://github.com/user-attachments/assets/ce93b28a-1dcd-42c0-9a75-59c1d1da72b0)
+
+### How to use it?
+1. Open the Chatbox
+2. Enter the topic you want to generate
+3. Receive the markdown document in your Google Drive
